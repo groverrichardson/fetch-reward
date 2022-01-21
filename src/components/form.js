@@ -13,6 +13,9 @@ function Form() {
     return (
         <div className="Form h-screen flex flex-col justify-center content-center">
             <Container maxWidth="sm">
+                <h1 className="text-3xl font-bold mb-3">
+                    Create a New Account
+                </h1>
                 <form
                     action="/signup"
                     method="post"
