@@ -48,7 +48,7 @@ function Form() {
                         variant="outlined"
                     />
                     <FormControl fullWidth>
-                        <InputLabel id="occupation-select-label">
+                        <InputLabel required id="occupation-select-label">
                             Occupation
                         </InputLabel>
                         <Select
@@ -61,7 +61,9 @@ function Form() {
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
-                        <InputLabel id="state-select-label">State</InputLabel>
+                        <InputLabel required id="state-select-label">
+                            State
+                        </InputLabel>
                         <Select
                             labelId="state-select-label"
                             id="state-select"
@@ -76,7 +78,7 @@ function Form() {
                         className="w-full"
                         variant="contained"
                         type="submit">
-                        Submit
+                        Create Account
                     </Button>
                 </form>
             </Container>
