@@ -20,7 +20,6 @@ function Form() {
     const [password, setPassword] = useState('');
     const [occupation, setOccupation] = useState('');
     const [state, setState] = useState('');
-    const [error, setError] = useState('');
 
     useEffect(() => {
         axios
@@ -54,8 +53,8 @@ function Form() {
 
     let handleChange = (e, type) => {
         if (type === 'name') setUserName(e.target.value);
-        if (type === 'email') setUserName(e.target.value);
-        if (type === 'password') setUserName(e.target.value);
+        if (type === 'email') setEmail(e.target.value);
+        if (type === 'password') setPassword(e.target.value);
     };
 
     let handleSubmit = (e) => {
