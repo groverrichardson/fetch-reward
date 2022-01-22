@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Confirmation from './confirmation';
 
 function Form() {
     const [occupationList, setOccupationList] = useState([]);
@@ -20,6 +21,7 @@ function Form() {
     const [password, setPassword] = useState('');
     const [occupation, setOccupation] = useState('');
     const [state, setState] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         axios
@@ -73,101 +75,107 @@ function Form() {
         }).then(function (response) {
             console.log(response);
         });
+
+        setSubmitted(true);
     };
 
-    return (
-        <div className="Form h-screen flex flex-col justify-center content-center">
-            <Container maxWidth="sm">
-                <h1 className="text-3xl font-bold mb-3">
-                    Create a New Account
-                </h1>
-                <form
-                    action="/signup"
-                    method="post"
-                    id="signup"
-                    className="grid"
-                    onSubmit={handleSubmit}>
-                    <TextField
-                        required
-                        id="outlined-name"
-                        label="Name"
-                        variant="outlined"
-                        onChange={(e) => {
-                            handleChange(e, 'name');
-                        }}
-                    />
-                    <TextField
-                        required
-                        id="outlined-email"
-                        label="Email"
-                        variant="outlined"
-                        onChange={(e) => {
-                            handleChange(e, 'name');
-                        }}
-                    />
-                    <TextField
-                        required
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        variant="outlined"
-                        onChange={(e) => {
-                            handleChange(e, 'name');
-                        }}
-                    />
-                    <FormControl fullWidth>
-                        <InputLabel required id="occupation-select-label">
-                            Occupation
-                        </InputLabel>
-                        <Select
-                            labelId="occupation-select-label"
-                            id="occupation-select"
-                            value={occupationIndex}
-                            label="occupation"
+    if (submitted === true) {
+        return <Confirmation />;
+    } else {
+        return (
+            <div className="Form h-screen flex flex-col justify-center content-center">
+                <Container maxWidth="sm">
+                    <h1 className="text-3xl font-bold mb-3">
+                        Create a New Account
+                    </h1>
+                    <form
+                        action="/signup"
+                        method="post"
+                        id="signup"
+                        className="grid"
+                        onSubmit={handleSubmit}>
+                        <TextField
+                            required
+                            id="outlined-name"
+                            label="Name"
+                            variant="outlined"
                             onChange={(e) => {
-                                handleSelectChange(e, 'occupation');
-                            }}>
-                            {occupationList.map((occupation, i) => {
-                                return (
-                                    <MenuItem key={i} value={i}>
-                                        {occupation}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel required id="state-select-label">
-                            State
-                        </InputLabel>
-                        <Select
-                            labelId="state-select-label"
-                            id="state-select"
-                            value={stateIndex}
-                            label="state"
+                                handleChange(e, 'name');
+                            }}
+                        />
+                        <TextField
+                            required
+                            id="outlined-email"
+                            label="Email"
+                            variant="outlined"
                             onChange={(e) => {
-                                handleSelectChange(e, 'state');
-                            }}>
-                            {stateList.map((state, i) => {
-                                return (
-                                    <MenuItem key={i} value={i}>
-                                        {state.abbreviation}
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <Button
-                        id="submit-button"
-                        className="w-full"
-                        variant="contained"
-                        type="submit">
-                        Create Account
-                    </Button>
-                </form>
-            </Container>
-        </div>
-    );
+                                handleChange(e, 'name');
+                            }}
+                        />
+                        <TextField
+                            required
+                            id="outlined-password-input"
+                            label="Password"
+                            type="password"
+                            variant="outlined"
+                            onChange={(e) => {
+                                handleChange(e, 'name');
+                            }}
+                        />
+                        <FormControl fullWidth>
+                            <InputLabel required id="occupation-select-label">
+                                Occupation
+                            </InputLabel>
+                            <Select
+                                labelId="occupation-select-label"
+                                id="occupation-select"
+                                value={occupationIndex}
+                                label="occupation"
+                                onChange={(e) => {
+                                    handleSelectChange(e, 'occupation');
+                                }}>
+                                {occupationList.map((occupation, i) => {
+                                    return (
+                                        <MenuItem key={i} value={i}>
+                                            {occupation}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <InputLabel required id="state-select-label">
+                                State
+                            </InputLabel>
+                            <Select
+                                labelId="state-select-label"
+                                id="state-select"
+                                value={stateIndex}
+                                label="state"
+                                onChange={(e) => {
+                                    handleSelectChange(e, 'state');
+                                }}>
+                                {stateList.map((state, i) => {
+                                    return (
+                                        <MenuItem key={i} value={i}>
+                                            {state.abbreviation}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
+                        </FormControl>
+                        <Button
+                            id="submit-button"
+                            className="w-full"
+                            variant="contained"
+                            type="submit">
+                            Create Account
+                        </Button>
+                    </form>
+                </Container>
+            </div>
+        );
+    }
 }
 
 export default Form;
