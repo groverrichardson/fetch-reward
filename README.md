@@ -2,6 +2,8 @@
 
 This is a sample user creation form that users can use to create new accounts. It was designed to be clean, simple, and easy to use.
 
+[Live Demo](https://fetch-reward.vercel.app/)
+
 ## Tech/Framework Used
 
 Built with:
