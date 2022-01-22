@@ -19,14 +19,20 @@ Here is a quick guide on how to get this form up and running.
 ### Cloning the repository
 
 1. Above the list of files on this Repo, click **Code**.
-   <img src='readme_images/code-button.png'>
+
+    <img src='readme_images/code-button.png'>
+
 2. To clone the repository using HTTPS, under "Clone with HTTPS", click the clipboard icon to the right of the URL. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the clickboard icon to the right of the URL. To clone a repository using GitHub CLI, click **Use GitHub CLI**, then click the clickboard icon to the right of the URL.
-   <img src='readme_images/https-url-clone.png'>
-   <img src='readme_images/https-url-clone-cli.png'>
+
+    <img src='readme_images/https-url-clone.png'>
+    <img src='readme_images/https-url-clone-cli.png'>
+
 3. Open Terminal.
 4. Change the current working directory to the location where you want the cloned directory.
 5. Type `git clone`, and then paste the URL you copied earlier.
-   `$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+
+    `$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+
 6. Press **Enter** to create your local clone.
 
 ```
