@@ -11,7 +11,9 @@ import React, { useEffect, useState } from 'react';
 
 function Form() {
     const [occupationList, setOccupationList] = useState([]);
+    const [occupationIndex, setOccupationIndex] = useState('');
     const [stateList, setStateList] = useState([[]]);
+    const [stateIndex, setStateIndex] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -36,6 +38,14 @@ function Form() {
             })
             .catch((err) => setError(err.message));
     }, []);
+
+    let handleOccupationChange = (e) => {
+        setOccupationIndex(e.target.value);
+    };
+
+    let handleStateChange = (e) => {
+        setStateIndex(e.target.value);
+    };
 
     return (
         <div className="Form h-screen flex flex-col justify-center content-center">
@@ -74,11 +84,16 @@ function Form() {
                         <Select
                             labelId="occupation-select-label"
                             id="occupation-select"
-                            value="10"
-                            label="occupation">
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            value={occupationIndex}
+                            label="occupation"
+                            onChange={handleOccupationChange}>
+                            {occupationList.map((occupation, i) => {
+                                return (
+                                    <MenuItem key={i} value={i}>
+                                        {occupation}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
@@ -88,11 +103,16 @@ function Form() {
                         <Select
                             labelId="state-select-label"
                             id="state-select"
-                            value="10"
-                            label="state">
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            value={stateIndex}
+                            label="state"
+                            onChange={handleStateChange}>
+                            {stateList.map((state, i) => {
+                                return (
+                                    <MenuItem key={i} value={i}>
+                                        {state.abbreviation}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <Button
