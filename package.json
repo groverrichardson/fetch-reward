@@ -1,5 +1,5 @@
 {
-    "name": "user-creation",
+    "name": "user-creation-form",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
