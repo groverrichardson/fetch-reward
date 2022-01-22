@@ -57,16 +57,10 @@ function Form() {
         setState(stateList[index]);
     };
 
-    let handleNameChange = (e) => {
-        setUserName(e.target.value);
-    };
-
-    let handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    let handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+    let handleChange = (e, type) => {
+        if (type === 'name') setUserName(e.target.value);
+        if (type === 'email') setUserName(e.target.value);
+        if (type === 'password') setUserName(e.target.value);
     };
 
     let handleSubmit = (e) => {
@@ -104,14 +98,18 @@ function Form() {
                         id="outlined-name"
                         label="Name"
                         variant="outlined"
-                        onChange={handleNameChange}
+                        onChange={(e) => {
+                            handleChange(e, 'name');
+                        }}
                     />
                     <TextField
                         required
                         id="outlined-email"
                         label="Email"
                         variant="outlined"
-                        onChange={handleEmailChange}
+                        onChange={(e) => {
+                            handleChange(e, 'name');
+                        }}
                     />
                     <TextField
                         required
@@ -119,7 +117,9 @@ function Form() {
                         label="Password"
                         type="password"
                         variant="outlined"
-                        onChange={handlePasswordChange}
+                        onChange={(e) => {
+                            handleChange(e, 'name');
+                        }}
                     />
                     <FormControl fullWidth>
                         <InputLabel required id="occupation-select-label">
