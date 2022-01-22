@@ -1,7 +1,9 @@
-#User Creation Form
+# User Creation Form
+
 This is a sample user creation form that users can use to create new accounts. It was designed to be clean, simple, and easy to use.
 
-##Tech/Framework Used
+## Tech/Framework Used
+
 Built with:
 
 -   React
@@ -10,10 +12,11 @@ Built with:
 -   MUI
 -   Axios
 
-##Installation
+## Installation
+
 Here is a quick guide on how to get this form up and running.
 
-###Cloning the repository
+### Cloning the repository
 
 1. Above the list of files on this Repo, click **Code**.
    <img src='readme_images/code-button.png'>
@@ -35,8 +38,10 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 > Unpacking objects: 100% (10/10), done.
 ```
 
-###Running Application
+### Running Application
+
 Navigate to the your newly cloned repository and enter `npm start` to run.
 
-##Credits
+## Credits
+
 Thank you to the awesome team at Fetch Rewards for this amazing opportunity. I couldn't have done it without you!
