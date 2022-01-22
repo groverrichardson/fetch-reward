@@ -45,16 +45,18 @@ function Form() {
             .catch((err) => setError(err.message));
     }, []);
 
-    let handleOccupationChange = (e) => {
+    let handleSelectChange = (e, type) => {
         let index = e.target.value;
-        setOccupationIndex(index);
-        setOccupation(occupationList[index]);
-    };
 
-    let handleStateChange = (e) => {
-        let index = e.target.value;
-        setStateIndex(e.target.value);
-        setState(stateList[index]);
+        if (type === 'occupation') {
+            setOccupationIndex(index);
+            setOccupation(occupationList[index]);
+        }
+
+        if (type === 'state') {
+            setStateIndex(e.target.value);
+            setState(stateList[index]);
+        }
     };
 
     let handleChange = (e, type) => {
@@ -130,7 +132,9 @@ function Form() {
                             id="occupation-select"
                             value={occupationIndex}
                             label="occupation"
-                            onChange={handleOccupationChange}>
+                            onChange={(e) => {
+                                handleSelectChange(e, 'occupation');
+                            }}>
                             {occupationList.map((occupation, i) => {
                                 return (
                                     <MenuItem key={i} value={i}>
@@ -149,7 +153,9 @@ function Form() {
                             id="state-select"
                             value={stateIndex}
                             label="state"
-                            onChange={handleStateChange}>
+                            onChange={(e) => {
+                                handleSelectChange(e, 'state');
+                            }}>
                             {stateList.map((state, i) => {
                                 return (
                                     <MenuItem key={i} value={i}>
