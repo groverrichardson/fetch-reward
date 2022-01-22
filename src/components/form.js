@@ -7,6 +7,7 @@ import {
     Select,
     TextField,
 } from '@mui/material';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 function Form() {
@@ -14,6 +15,11 @@ function Form() {
     const [occupationIndex, setOccupationIndex] = useState('');
     const [stateList, setStateList] = useState([[]]);
     const [stateIndex, setStateIndex] = useState('');
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [occupation, setOccupation] = useState('');
+    const [state, setState] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -40,11 +46,45 @@ function Form() {
     }, []);
 
     let handleOccupationChange = (e) => {
-        setOccupationIndex(e.target.value);
+        let index = e.target.value;
+        setOccupationIndex(index);
+        setOccupation(occupationList[index]);
     };
 
     let handleStateChange = (e) => {
+        let index = e.target.value;
         setStateIndex(e.target.value);
+        setState(stateList[index]);
+    };
+
+    let handleNameChange = (e) => {
+        setUserName(e.target.value);
+    };
+
+    let handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    let handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    let handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios({
+            method: 'post',
+            url: 'https://frontend-take-home.fetchrewards.com/form',
+            data: {
+                name: `${userName}`,
+                email: `${email}`,
+                password: `${password}`,
+                occupation: `${occupation}`,
+                state: `${state}`,
+            },
+        }).then(function (response) {
+            console.log(response);
+        });
     };
 
     return (
@@ -57,18 +97,21 @@ function Form() {
                     action="/signup"
                     method="post"
                     id="signup"
-                    className="grid">
+                    className="grid"
+                    onSubmit={handleSubmit}>
                     <TextField
                         required
                         id="outlined-name"
                         label="Name"
                         variant="outlined"
+                        onChange={handleNameChange}
                     />
                     <TextField
                         required
                         id="outlined-email"
                         label="Email"
                         variant="outlined"
+                        onChange={handleEmailChange}
                     />
                     <TextField
                         required
@@ -76,6 +119,7 @@ function Form() {
                         label="Password"
                         type="password"
                         variant="outlined"
+                        onChange={handlePasswordChange}
                     />
                     <FormControl fullWidth>
                         <InputLabel required id="occupation-select-label">
