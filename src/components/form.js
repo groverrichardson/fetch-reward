@@ -23,26 +23,19 @@ function Form() {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const searchOptions = {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-            },
-            redirect: 'follow',
-        };
-
-        fetch(`https://frontend-take-home.fetchrewards.com/form`, searchOptions)
+        axios
+            .get(`https://frontend-take-home.fetchrewards.com/form`)
             .then((response) => {
-                if (response.ok) {
-                    return response.json();
+                setOccupationList(response.data.occupations);
+                setStateList(response.data.states);
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
                 }
-                throw new Error('Unable to fetch data');
-            })
-            .then((data) => {
-                setOccupationList(data.occupations);
-                setStateList(data.states);
-            })
-            .catch((err) => setError(err.message));
+            });
     }, []);
 
     let handleSelectChange = (e, type) => {
