@@ -7,9 +7,36 @@ import {
     Select,
     TextField,
 } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Form() {
+    const [occupationList, setOccupationList] = useState([]);
+    const [stateList, setStateList] = useState([[]]);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const searchOptions = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+            },
+            redirect: 'follow',
+        };
+
+        fetch(`https://frontend-take-home.fetchrewards.com/form`, searchOptions)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Unable to fetch data');
+            })
+            .then((data) => {
+                setOccupationList(data.occupations);
+                setStateList(data.states);
+            })
+            .catch((err) => setError(err.message));
+    }, []);
+
     return (
         <div className="Form h-screen flex flex-col justify-center content-center">
             <Container maxWidth="sm">
@@ -40,13 +67,6 @@ function Form() {
                         type="password"
                         variant="outlined"
                     />
-                    <TextField
-                        required
-                        id="outlined-password-input"
-                        label="Verify Password"
-                        type="password"
-                        variant="outlined"
-                    />
                     <FormControl fullWidth>
                         <InputLabel required id="occupation-select-label">
                             Occupation
@@ -54,6 +74,7 @@ function Form() {
                         <Select
                             labelId="occupation-select-label"
                             id="occupation-select"
+                            value="10"
                             label="occupation">
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
@@ -67,6 +88,7 @@ function Form() {
                         <Select
                             labelId="state-select-label"
                             id="state-select"
+                            value="10"
                             label="state">
                             <MenuItem value={10}>Ten</MenuItem>
                             <MenuItem value={20}>Twenty</MenuItem>
