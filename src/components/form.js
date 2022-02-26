@@ -10,6 +10,7 @@ import {
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Confirmation from './confirmation';
+import validator from 'validator';
 
 function Form() {
     const [occupationList, setOccupationList] = useState([]);
@@ -59,24 +60,30 @@ function Form() {
         if (type === 'password') setPassword(e.target.value);
     };
 
+    function validated() {
+        return true;
+    }
+
     let handleSubmit = (e) => {
         e.preventDefault();
 
-        axios({
-            method: 'post',
-            url: 'https://frontend-take-home.fetchrewards.com/form',
-            data: {
-                name: `${userName}`,
-                email: `${email}`,
-                password: `${password}`,
-                occupation: `${occupation}`,
-                state: `${state}`,
-            },
-        }).then(function (response) {
-            console.log(response);
-        });
+        if (validated()) {
+            axios({
+                method: 'post',
+                url: 'https://frontend-take-home.fetchrewards.com/form',
+                data: {
+                    name: `${userName}`,
+                    email: `${email}`,
+                    password: `${password}`,
+                    occupation: `${occupation}`,
+                    state: `${state}`,
+                },
+            }).then(function (response) {
+                console.log(response);
+            });
 
-        setSubmitted(true);
+            setSubmitted(true);
+        }
     };
 
     if (submitted === true) {
