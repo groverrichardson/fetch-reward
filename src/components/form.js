@@ -109,7 +109,7 @@ function Form() {
                             label="Email"
                             variant="outlined"
                             onChange={(e) => {
-                                handleChange(e, 'name');
+                                handleChange(e, 'email');
                             }}
                         />
                         <TextField
@@ -119,7 +119,7 @@ function Form() {
                             type="password"
                             variant="outlined"
                             onChange={(e) => {
-                                handleChange(e, 'name');
+                                handleChange(e, 'password');
                             }}
                         />
                         <FormControl fullWidth>
