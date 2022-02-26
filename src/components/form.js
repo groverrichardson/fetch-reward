@@ -22,7 +22,9 @@ function Form() {
     const [password, setPassword] = useState('');
     const [occupation, setOccupation] = useState('');
     const [state, setState] = useState('');
+    const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         axios
@@ -80,9 +82,12 @@ function Form() {
                 },
             }).then(function (response) {
                 console.log(response);
+                if (response.status !== 200) {
+                    setError(true);
+                    return;
+                }
+                setSubmitted(true);
             });
-
-            setSubmitted(true);
         }
     };
 
