@@ -20,12 +20,14 @@ function Form() {
     const [stateIndex, setStateIndex] = useState('');
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
     const [occupation, setOccupation] = useState('');
     const [state, setState] = useState('');
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState([false, email]);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         axios
@@ -64,7 +66,9 @@ function Form() {
     };
 
     function validated() {
-        const [isError, type] = error;
+        !validator.isEmail(email) ? setEmailError(true) : setEmailError(false);
+
+        if (setEmailError || setPasswordError) return false;
 
         return true;
     }
@@ -131,11 +135,18 @@ function Form() {
                             id="outlined-email"
                             label="Email"
                             variant="outlined"
-                            error={true}
+                            error={emailError}
                             onChange={(e) => {
                                 handleChange(e, 'email');
                             }}
                         />
+                        {emailError ? (
+                            <p className="email-error-message text-sm text-red-500">
+                                Please enter a valid email address.
+                            </p>
+                        ) : (
+                            ''
+                        )}
                         <TextField
                             required
                             id="outlined-password-input"
