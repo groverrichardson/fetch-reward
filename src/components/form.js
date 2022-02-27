@@ -11,6 +11,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Confirmation from './confirmation';
 import validator from 'validator';
+import { LoadingButton } from '@mui/lab';
 
 function Form() {
     const [occupationList, setOccupationList] = useState([]);
@@ -22,9 +23,9 @@ function Form() {
     const [password, setPassword] = useState('');
     const [occupation, setOccupation] = useState('');
     const [state, setState] = useState('');
-    const [submitting, setSubmitting] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState([false, email]);
 
     useEffect(() => {
         axios
@@ -63,12 +64,12 @@ function Form() {
     };
 
     function validated() {
+        const [isError, type] = error;
+
         return true;
     }
 
-    let handleSubmit = (e) => {
-        e.preventDefault();
-
+    function submitData() {
         if (validated()) {
             axios({
                 method: 'post',
@@ -89,6 +90,16 @@ function Form() {
                 setSubmitted(true);
             });
         }
+    }
+
+    let handleSubmit = (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+        setTimeout(() => {
+            submitData();
+        }, 1000);
     };
 
     if (submitted === true) {
@@ -120,6 +131,7 @@ function Form() {
                             id="outlined-email"
                             label="Email"
                             variant="outlined"
+                            error={true}
                             onChange={(e) => {
                                 handleChange(e, 'email');
                             }}
@@ -176,13 +188,14 @@ function Form() {
                                 })}
                             </Select>
                         </FormControl>
-                        <Button
+                        <LoadingButton
+                            loading={loading}
                             id="submit-button"
                             className="w-full"
                             variant="contained"
                             type="submit">
                             Create Account
-                        </Button>
+                        </LoadingButton>
                     </form>
                 </Container>
             </div>
