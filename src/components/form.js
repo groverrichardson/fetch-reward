@@ -94,6 +94,7 @@ function Form() {
                 setSubmitted(true);
             });
         }
+        setLoading(false);
     }
 
     let handleSubmit = (e) => {
