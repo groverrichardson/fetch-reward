@@ -94,10 +94,14 @@ function Form() {
                     setError(true);
                     return;
                 }
+                setError(false);
                 setSubmitted(true);
             });
         }
-        setLoading(false);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
     }
 
     let handleSubmit = (e) => {
@@ -119,6 +123,14 @@ function Form() {
                     <h1 className="text-3xl font-bold mb-3">
                         Create a New Account
                     </h1>
+                    {error ? (
+                        <p className="pb-4 text-red-500">
+                            An error occurred. Please try submitting the form
+                            again.
+                        </p>
+                    ) : (
+                        ''
+                    )}
                     <form
                         action="/signup"
                         method="post"
