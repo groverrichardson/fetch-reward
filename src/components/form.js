@@ -66,11 +66,14 @@ function Form() {
     };
 
     function validated() {
-        !validator.isEmail(email) ? setEmailError(true) : setEmailError(false);
+        let validEmail = validator.isEmail(email) ? true : false;
+        let validPassword = validator.isStrongPassword(password) ? true : false;
 
-        if (setEmailError || setPasswordError) return false;
+        validEmail ? setEmailError(false) : setEmailError(true);
+        validPassword ? setPasswordError(false) : setPasswordError(true);
 
-        return true;
+        if (validEmail && validPassword) return true;
+        return false;
     }
 
     function submitData() {
@@ -104,7 +107,7 @@ function Form() {
 
         setTimeout(() => {
             submitData();
-        }, 1000);
+        }, 500);
     };
 
     if (submitted === true) {
@@ -158,6 +161,24 @@ function Form() {
                                 handleChange(e, 'password');
                             }}
                         />
+                        {passwordError ? (
+                            <div className="password-helpers">
+                                <p className="password-error-message text-sm text-red-500">
+                                    Please enter a valid password.
+                                </p>
+                                <p className="password-error-message text-xs">
+                                    Password should contain at least eight
+                                    characters, one lowercase, one uppercase,
+                                    one number, and one symbol.
+                                </p>
+                            </div>
+                        ) : (
+                            <p className="password-error-message text-xs">
+                                Password should contain at least eight
+                                characters, one lowercase, one uppercase, one
+                                number, and one symbol.
+                            </p>
+                        )}
                         <FormControl fullWidth>
                             <InputLabel required id="occupation-select-label">
                                 Occupation
